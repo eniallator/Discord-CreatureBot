@@ -46,12 +46,8 @@ async def on_message(message):
     elif not message.server:
         user_command = message.content
 
-    if CLIENT.user.id != message.author.id and user_command:
-        log_message = str(message.author) + ' ran: "' + user_command + '"'
-        if message.server:
-            log_message += ' in server: ' + message.server.name
-        else:
-            log_message += ' in a private message'
+    if CLIENT.user.id != message.author.id and user_command and message.server:
+        log_message = str(message.author) + ' ran: "' + user_command + '" in server: ' + message.server.name
         _log(log_message)
 
         if user_command.lower().split(' ')[0] == 'help':
